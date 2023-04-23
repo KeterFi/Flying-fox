@@ -504,10 +504,6 @@ onUnmounted(() => {
                     justify-content: center;
                 "
               >
-                <span style="padding-right: 25px;">
-                  <img src="./assets/erweima.jpg" width="100" height="100" alt="weixin">
-                </span>
-                <img src="xiaobang1.jpg" width="100" height="100" alt="xiaobang">
               </div>
             </div>
           </template>
