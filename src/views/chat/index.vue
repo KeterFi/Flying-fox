@@ -505,9 +505,9 @@ onUnmounted(() => {
                 "
               >
                 <span style="padding-right: 25px;">
-                  <img src="http://localhost:1002/src/assets/erweima.jpg" width="100" height="100" alt="weixin">
+                  <img src="./src/assets/erweima.jpg" width="100" height="100" alt="weixin">
                 </span>
-                <img src="http://localhost:1002/src/assets/xiaobang1.jpg" width="100" height="100" alt="xiaobang">
+                <img src="xiaobang1.jpg" width="100" height="100" alt="xiaobang">
               </div>
             </div>
           </template>
