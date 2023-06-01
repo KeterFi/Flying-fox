@@ -464,6 +464,110 @@ onUnmounted(() => {
   if (loading.value)
     controller.abort()
 })
+
+//按钮图片
+function showModal(title: string, titleText: string, primaryText: string, secondaryText: string, imageUrl: string) {
+  if (loading.value)
+    return
+
+  const existingModal = document.querySelector('.custom-modal')
+  if (existingModal)
+    return
+
+  const modalEl = document.createElement('div')
+  modalEl.classList.add('custom-modal')
+
+  const titleEl = document.createElement('div')
+  titleEl.innerHTML = title
+  titleEl.classList.add('modal-title')
+  modalEl.appendChild(titleEl)
+
+  const closeBtnEl = document.createElement('button')
+  closeBtnEl.classList.add('modal-close')
+  closeBtnEl.innerHTML = '×'
+  closeBtnEl.setAttribute('aria-label', '关闭')
+  modalEl.appendChild(closeBtnEl)
+
+  const contentEl = document.createElement('div')
+  contentEl.classList.add('modal-content')
+  contentEl.innerHTML = `
+    <p class="first-primary">${primaryText}</p>
+    <p class="text-primary">${secondaryText}</p>
+    <p class="title-primary">${titleText}</p>
+    <img src="${imageUrl}" alt="Example Image">
+  `
+  modalEl.appendChild(contentEl)
+
+  const btnContainerEl = document.createElement('div')
+  btnContainerEl.classList.add('modal-buttons')
+  modalEl.appendChild(btnContainerEl)
+
+  closeBtnEl.addEventListener('click', () => closeModal(modalEl))
+
+  document.body.appendChild(modalEl)
+
+  setTimeout(() => modalEl.classList.add('is-visible'), 100)
+}
+function closeModal(modalEl: HTMLElement) {
+  modalEl.classList.remove('is-visible')
+  setTimeout(() => modalEl.remove(), 300)
+}
+// 爱心特效
+// 获取爱心图片
+window.onload = function () {
+  const heartImage = document.getElementById('heart')
+  let isAnimating = false
+
+  const heartMap = (function createHeartMap() {
+    return new Map()
+  })()
+
+  if (heartImage) {
+    heartImage.onclick = function (event) {
+      event.preventDefault()
+
+      if (isAnimating) { // 如果当前正在执行动画，则跳过此次点击事件
+        return
+      }
+
+      const x: number = event.clientX
+      const y: number = event.clientY
+
+      const heart = createHeart(x, y)
+      document.body.appendChild(heart)
+
+      isAnimating = true
+      setTimeout(() => {
+        const heartData = heartMap.get(heart)
+        if (!heartData.isRemoved) {
+          heart.remove()
+          heartData.isRemoved = true
+          isAnimating = false // 爱心特效结束后设置标志位为 false
+        }
+      }, 2000)
+    }
+  }
+
+  function createHeart(x: number, y: number) {
+    const heart = document.createElement('div')
+    heart.className = 'heart'
+    heart.style.left = `${x}px`
+    heart.style.top = `${y}px`
+
+    const heartData = { isRemoved: false }
+    heartMap.set(heart, heartData)
+
+    heart.addEventListener('animationend', () => {
+      const heartData = heartMap.get(heart)
+      if (heart.parentElement && !heartData.isRemoved) {
+        heart.parentElement.removeChild(heart)
+        heartData.isRemoved = true
+      }
+    })
+
+    return heart
+  }
+}
 </script>
 
 <template>
@@ -498,13 +602,8 @@ onUnmounted(() => {
               <b>后台维护费用高，各位大大有能力请打赏QAQ</b>
               <div />
               <b>服务就能永久免费下去！！</b>
-              <div
-                style="
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                "
-              >
+              <div class="fixl_conent">
+                <span style="padding-right: 25px;" />
               </div>
             </div>
           </template>
@@ -536,23 +635,74 @@ onUnmounted(() => {
     </main>
     <footer :class="footerClass">
       <div class="w-full max-w-screen-xl m-auto">
+			<div style="height: 40px; width: 100%;background-color: #F9F9F9; color: aliceblue; border-radius: 5px;position: relative;">
+          <div class="fixl_conent line_box ">
+            <div>
+              <span class="fixl_conent">
+                <div />
+                <div
+                  class="buttontt dark:hover:bg-[#414755] hujiaoxiaobang fixl_conent"
+                >
+                  <button class=" dark:hover:bg-[#414755] ">
+                    <!-- #小程序://呼叫小帮/Ke6h5Marjt1o0bs -->
+                    <a href="#小程序://呼叫小帮/Ke6h5Marjt1o0bs" style="display: flex; ">
+                      <img src="../../../UTC.png" style="width: 20px;height: 20px;border-radius: 50%;">
+                      <strong style="margin-left: 5px;text-align: center;line-height: 20px; font-size: 12px;letter-spacing: 2px;"> 呼叫小帮 </strong>
+                    </a>
+                  </button>
+                </div>
+                <div
+                  tooltip="您的贴心小帮"
+                  class="buttontt dark:hover:bg-[#414755] hujiaoxiaobang fixl_conent"
+                >
+                  <button class=" dark:hover:bg-[#414755] " @click="showModal('', '地址:兰园食堂三楼A10', '— 兰园印象 AI 图文 —', '优惠多多，毕业生享八折优惠', '../../../photo.jpg')">
+                    <a href="#" style="display: flex;">
+                      <img src="../../../lan.png" style="width: 20px;height: 20px;border-radius: 50%;">
+                      <strong style="margin-left: 5px;text-align: center;line-height: 20px; font-size: 12px;letter-spacing: 2px;"> 兰园打印 </strong>
+                    </a>
+                  </button>
+                </div>
+                <div
+                  tooltip="您的贴心小帮"
+                  class="buttontt dark:hover:bg-[#414755] hujiaoxiaobang git fixl_conent"
+                  @click="showModal('', '', '', '— ♥♥♥ —', '../../../ok-pay.jpg')"
+                >
+                  <a href="#" style="display: flex;">
+                    <img src="../../../git.png" style="width: 20px;height: 20px;">
+                    <strong style="text-align: center;line-height: 20px; font-size: 12px;letter-spacing: 2px;"> 赞赏 </strong>
+                  </a>
+                </div>
+                <!-- 点赞按钮容器 -->
+                <div
+                  id="heart"
+                  tooltip="贴心"
+                  class="heart buttontt dark:hover:bg-[#414755] git hread "
+                >
+                  <a href="#">
+                    <img id="heart" class="heart" src="../../../hread.png" style="width: 20px;height: 20px;">
+                  </a>
+                </div>
+              </span>
+            </div>
+          </div>
+        </div>
         <div class="flex items-center justify-between space-x-2">
-          <HoverButton @click="handleClear">
+          <HoverButton tooltip="点击删除记录~" @click="handleClear">
             <span class="text-xl text-[#4f555e] dark:text-white">
               <SvgIcon icon="ri:delete-bin-line" />
             </span>
           </HoverButton>
-          <HoverButton v-if="!isMobile" @click="handleExport">
+          <HoverButton v-if="!isMobile" tooltip="点击下载记录~" @click="handleExport">
             <span class="text-xl text-[#4f555e] dark:text-white">
               <SvgIcon icon="ri:download-2-line" />
             </span>
           </HoverButton>
-          <HoverButton v-if="!isMobile" @click="toggleUsingContext">
+          <HoverButton v-if="!isMobile" tooltip="点击取消上下文或开启携带上下文~" @click="toggleUsingContext">
             <span class="text-xl" :class="{ 'text-[#4b9e5f]': usingContext, 'text-[#a8071a]': !usingContext }">
               <SvgIcon icon="ri:chat-history-line" />
             </span>
           </HoverButton>
-          <NAutoComplete v-model:value="prompt" :options="searchOptions" :render-label="renderOption">
+          <NAutoComplete v-model:value="prompt" tooltip="点击下载记录~" :options="searchOptions" :render-label="renderOption">
             <template #default="{ handleInput, handleBlur, handleFocus }">
               <NInput
                 ref="inputRef"
