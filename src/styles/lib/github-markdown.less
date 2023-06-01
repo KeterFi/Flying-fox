@@ -127,6 +127,167 @@ html {
   mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' version='1.1' aria-hidden='true'><path fill-rule='evenodd' d='M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z'></path></svg>");
 }
 
+/* 按钮 */
+.buttontt:hover{
+  transition: 0.4s;
+  box-shadow: 0px 0px 9px 5px rgba(0,0,0,0.1);
+}
+
+.hujiaoxiaobang{
+  width: 120px;
+  height: 25px;
+  background-color: #DEDEDE;
+  border-radius: 30px;
+  margin-right: 10px;
+}
+
+.fixl_conent{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.line_box{
+  height: 35px;
+  width: 100%;
+  background-color: #F9F9F9;
+  border-radius: 5px;
+  color: black;
+  position: absolute;
+}
+
+.git{
+  border-radius: 30px;
+  width: 75px;
+}
+.hread{
+  width: 20px;
+}
+
+/* 模态框容器 */
+.modal-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+/* 模态框背景 */
+.modal-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-title {
+  display: flex;
+  justify-content: center;
+  text-align: center; /* 让标题文本居中显示 */
+}
+
+/* 模态框内容 */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  max-width: 300px;
+  width: 100%;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  font-size: 8px;
+  text-align: center;
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.modal-content .text-primary {
+  color: #ff7b00; 
+  font-weight: 1000;
+}
+
+.modal-content .first-primary {
+  color: #0026ff; 
+  // font-weight: 1000;
+  font-size: 10px;
+}
+
+.custom-modal {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  background-color: white;
+  // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.custom-modal.is-visible {
+  opacity: 1;
+}
+
+// 增加按钮
+.modal-close {
+  /* 增加按钮大小 */
+  width: 24px;
+  height: 24px;
+  font-size: 20px;
+  line-height: 24px;
+  /* 增加内边距 */
+  // padding:8px;
+  /* 修改按钮颜色 */
+  color: white;
+  background-color: #bebbbb;
+  border: none;
+  /* 添加圆角 */
+  border-radius: 100%;
+  /* 设置为相对定位 */
+  position: absolute;
+  top: 1%;
+  right: 2%;
+  cursor: pointer;
+}
+
+/* 鼠标悬停时改变背景颜色 */
+.modal-close:hover {
+  background-color: #666;
+}
+
+// 爱心特效
+.heart {
+  width: 20px;
+  height: 20px;
+  z-index: 9999;
+  background-image: url('../../../heart.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  animation: heart 1s ease-out;
+  // z-index: 9999;
+}
+
+@keyframes heart {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: scale(1.4);
+    opacity: 0;
+  }
+}
+
+
 .markdown-body details,
 .markdown-body figcaption,
 .markdown-body figure {
