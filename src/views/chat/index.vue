@@ -644,7 +644,6 @@ window.onload = function () {
                   class="buttontt dark:hover:bg-[#414755] hujiaoxiaobang fixl_conent"
                 >
                   <button class=" dark:hover:bg-[#414755] ">
-                    <!-- #小程序://呼叫小帮/Ke6h5Marjt1o0bs -->
                     <a href="#小程序://呼叫小帮/Ke6h5Marjt1o0bs" style="display: flex; ">
                       <img src="../../../UTC.png" style="width: 20px;height: 20px;border-radius: 50%;">
                       <strong style="margin-left: 5px;text-align: center;line-height: 20px; font-size: 12px;letter-spacing: 2px;"> 呼叫小帮 </strong>
